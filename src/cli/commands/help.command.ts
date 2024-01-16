@@ -1,11 +1,11 @@
 import { Command } from './commands.interface.js';
 
-export class HelpComman implements Command {
+export class HelpCommand implements Command {
   public getName(): string {
     return '--help';
   }
 
-  public async execute(...parameters: string[]): Promise<void> {
+  public async execute(..._parameters: string[]): Promise<void> {
     console.info(`
         Программа для подготовки данных для REST API сервера.
         Пример:
