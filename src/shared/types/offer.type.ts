@@ -1,5 +1,5 @@
 import { Photo } from './photo.type.js';
-import { typeOfOffer } from './typeOfOffer.js';
+import { typeOfOffer } from './typeOfOffer.type.js';
 import { Facilities } from './facilities.type.js';
 import { Coordinate } from './coordinate.type.js';
 import { User } from './user.type.js';
