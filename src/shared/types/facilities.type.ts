@@ -1,21 +1,3 @@
-export type Facilities = {
-  Breakfast: 'Breakfast';
-  Conditioning: 'Air Conditioning';
-  Laptop: 'Laptop';
-  Workspace: 'Friendly workspace';
-  Babyseat: 'Baby seat';
-  Washer: 'Washer';
-  Towels: 'Towels';
-  Fridge: 'Fridge';
+export interface Facilities {
+  [index: number]: string
 };
-
-// export enum Facilities {
-//   Breakfast = 'Breakfast',
-//   Conditioning = 'Air Conditioning',
-//   Laptop = 'Laptop',
-//   Workspace = 'Friendly workspace',
-//   Babyseat = 'Baby seat',
-//   Washer = 'Washer',
-//   Towels = 'Towels',
-//   Fridge = 'Fridge',
-// }

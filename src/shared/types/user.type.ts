@@ -1,7 +1,7 @@
 export type User = {
     name: string;
     email: string;
-    avatarUrl: string;
     password: string;
+    avatarUrl?: string;
     isPro: boolean
 };
