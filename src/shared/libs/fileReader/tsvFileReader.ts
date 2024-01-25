@@ -57,8 +57,8 @@ export class TSVFileReader implements FileReader {
           price: Number.parseInt(price, 10),
           facilities: facilities.split(','),
           authorOfOffer: [authorOfOffer.split(' ')].map(
-            ([name, email, password, avatarUrl, isPro]) => ({
-              name,
+            ([username, email, password, avatarUrl, isPro]) => ({
+              username,
               email,
               password,
               avatarUrl,
