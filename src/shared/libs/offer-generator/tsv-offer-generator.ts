@@ -4,7 +4,7 @@ import { OfferGenerator } from './offer-generator.interface.js';
 import { MockServerData, TypeOfOffer } from '../../types/index.js';
 import {
   generateRandomValue,
-  generateRandomItems,
+  getRandomItems,
   getRandomItem,
 } from '../../helpers/index.js';
 
@@ -18,20 +18,20 @@ export class TSVOfferGenerator implements OfferGenerator {
   constructor(private readonly mockData: MockServerData) {}
 
   public generate(): string {
-    const categories = generateRandomItems<string>(
+    const categories = getRandomItems<string>(
       this.mockData.categories
     ).join(';');
 
     const title = getRandomItem<string>(this.mockData.titles);
     const description = getRandomItem<string>(this.mockData.descriptions);
     const photo = getRandomItem<string>(this.mockData.offerImages);
-    const type = getRandomItem<string>([
+    const type = getRandomItem([
       TypeOfOffer.apartment,
       TypeOfOffer.hotel,
       TypeOfOffer.house,
       TypeOfOffer.room,
     ]);
-    const price = generateRandomValue(MIN_PRICE, MAX_PRICE).toString;
+    const price = generateRandomValue(MIN_PRICE, MAX_PRICE).toString();
     const author = getRandomItem<string>(this.mockData.users);
     const email = getRandomItem<string>(this.mockData.emails);
     const avatar = getRandomItem<string>(this.mockData.avatars);
@@ -57,3 +57,4 @@ export class TSVOfferGenerator implements OfferGenerator {
     ].join('\t');
   }
 }
+
