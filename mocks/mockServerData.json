@@ -1,0 +1,59 @@
+{
+    "api": {
+      "name": [
+        "Sunset Paradise Resort;photo/preview/SunsetParadise;photo/photo1 photo/photo2",
+        "Azure Waves Hotel;photo/preview/AzureWaves;photo/photo1 photo/photo2",
+        "Enchanted Garden Retreat;photo/preview/EnchantedGarden;photo/photo1 photo/photo2",
+        "Golden Sands Lodge;photo/preview/GoldenSands;photo/photo1 photo/photo2",
+        "Moonlit Oasis Inn;photo/preview/Moonlit;photo/photo1 photo/photo2",
+        "Serenity Villa;photo/preview/Serenity;photo/photo1 photo/photo2"
+      ],
+      "description": [
+        "Luxurious beachfront resort offering breathtaking sunset views and world-class amenities.",
+        "Experience the tranquility of the ocean with our stylish rooms and exceptional service.",
+        "Escape to our enchanting garden retreat, surrounded by lush greenery and peaceful ambiance.",
+        "Indulge in the ultimate comfort and relaxation at our elegant lodge with stunning views.",
+        "Immerse yourself in the magical atmosphere of our oasis under the moonlight.",
+        "Discover serenity and serenade your senses in our exquisite villa with panoramic views."
+      ],
+      "city": [
+        "Paris 48.85661 2.351499",
+        "Cologne 50.938361 6.959974",
+        "Brussels 50.846557 4.351697",
+        "Amsterdam 52.370216 4.895168",
+        "Hamburg 53.550341 10.000654",
+        "Dusseldorf 51.225402 6.776314"
+      ],
+      "premium": [
+        true,
+        false
+      ],
+      "favourite": [
+        true,
+        false
+      ],
+      "type": [
+        "apartment",
+        "house",
+        "room",
+        "hotel"
+      ],
+      "facilities": [
+        "Breakfast",
+        "Air conditioning",
+        "Laptop friendly workspace",
+        "Baby seat",
+        "Washer",
+        "Towels",
+        "Fridge"
+      ],
+      "authorOfOffer": [
+        "Андрей andrey@mail.com 123qwe /photo/avatar/andrey true",
+        "Добронрав dobro@jmail.com dsdsad /photo/avatar/dobro false",
+        "Кекс keksdrey@keks.com keks /photo/avatar/keks true",
+        "Василий vasiliy@mail.com vasiliy111 /photo/avatar/vasiliy false",
+        "Жанна janna@yandex.ru hoooorse /photo/avatar/janna false",
+        "Миша michael@mail.com mishamichael /photo/avatar/michael false"
+      ]
+    }
+  }

@@ -3,4 +3,4 @@ export * from './offer.type.js';
 export * from './photo.type.js';
 export * from './typeOfOffer.enum.js';
 export * from './user.type.js';
-export * from './mock-server-data.types.js';
+export * from './mockServerData.types.js';
