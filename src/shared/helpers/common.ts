@@ -1,5 +1,3 @@
-import { log } from 'console';
-
 export function generateRandomValue(
   min: number,
   max: number,
