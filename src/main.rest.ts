@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import { Container } from 'inversify';
 import { Logger, PinoLogger } from './shared/libs/logger/index.js';
 import { RestApplication } from './rest/index.js';
-import { Config, RestConfig, RestSchema } from './shared/libs/сonfig/index.js';
+import { Config, RestConfig, RestSchema } from './shared/libs/config/index.js';
 import { Component } from './shared/types/index.js';
 import {
   DatabaseClient,
