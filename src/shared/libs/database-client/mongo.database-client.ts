@@ -4,7 +4,6 @@ import { setTimeout } from 'node:timers/promises';
 import { DatabaseClient, RETRY } from './database-client.interface.js';
 import { Component } from '../../types/index.js';
 import { Logger } from '../logger/index.js';
-import { REFUSED } from 'node:dns';
 
 @injectable()
 export class MongoDatabaseClient implements DatabaseClient {
