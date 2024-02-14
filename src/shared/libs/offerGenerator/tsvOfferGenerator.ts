@@ -40,7 +40,6 @@ export class TSVOfferGenerator implements OfferGenerator {
     const price = generateRandomValue(PRICE.MIN_PRICE, PRICE.MAX_PRICE).toString();
     const facilities = getRandomItem(this.mockData.facilities);
     const authorOfOffer = getRandomItem(this.mockData.authorOfOffer).toString();
-    // const authorOfOffer;
     const numberOfComments = generateRandomValue(
       COMMENTS.MIN_NUMBER_OF_COMMENTS,
       COMMENTS.MAX_NUMBER_OF_COMMENTS

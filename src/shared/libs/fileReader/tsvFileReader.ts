@@ -2,6 +2,7 @@ import EventEmitter from 'node:events';
 import { createReadStream } from 'node:fs';
 
 import { FileReader } from './fileReader.interface.js';
+import { res } from 'pino-std-serializers';
 
 const CHUNK_SIZE = 16384; // 16KB
 
@@ -29,7 +30,9 @@ export class TSVFileReader extends EventEmitter implements FileReader {
         remainingData = remainingData.slice(++nextLinePosition);
         importedRowContent++;
 
-        this.emit('line', completeRow);
+        await new Promise((resolve) => {
+          this.emit('line', completeRow, resolve);
+        });
       }
     }
 

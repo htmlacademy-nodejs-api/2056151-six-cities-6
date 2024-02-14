@@ -1,6 +1,5 @@
 import { TypeOfOffer } from '../../../types/index.js';
 import { Facilities } from '../../../types/index.js';
-import { User } from '../../../types/index.js';
 
 export class CreateOfferDto {
   public name: string;
@@ -17,7 +16,7 @@ export class CreateOfferDto {
   public numberOfGuests: number;
   public price: number;
   public facilities: Facilities[];
-  public authorOfOffer: User[];
+  public authorOfOfferId: string;
   public numberOfComments: number;
   public coordinates: string;
 }

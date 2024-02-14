@@ -1,0 +1,7 @@
+openapi: 3.0.0
+info:
+  title: API for the demo project 'Six Cities'
+  description: List of available API endpoints and routes for the demo project 'Six Cities'
+  version: 1.0.0
+
+# TO DO: Have to finish spec later

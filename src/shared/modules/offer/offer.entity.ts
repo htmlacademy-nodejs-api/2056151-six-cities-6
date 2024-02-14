@@ -5,8 +5,7 @@ import {
   prop,
   Ref,
 } from '@typegoose/typegoose';
-import { TypeOfOffer } from '../../types/index.js';
-import { CategoryEntity } from '../category/index.js';
+import { TypeOfOffer, Cities } from '../../types/index.js';
 import { UserEntity } from '../user/index.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
@@ -21,42 +20,56 @@ export interface OfferEntity extends defaultClasses.Base {}
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({ trim: true, required: true })
-  public title!: string;
+  public name!: string;
 
-  @prop({ trim: true })
+  @prop({ trim: true, required: true })
   public description!: string;
 
-  @prop()
-  public image!: string;
+  @prop({ trim: true, required: true })
+  public createdDate!: string;
 
-  @prop()
-  public postDate!: Date;
+  @prop({ type: () => String, enum: Cities })
+  public city!: Cities;
 
-  @prop()
-  public price!: number;
+  @prop({ trim: true, required: true })
+  public previewImage!: string;
+
+  @prop({ trim: true, required: true })
+  public photos!: string;
+
+  @prop({ required: true })
+  public premium!: boolean;
+
+  @prop({ required: true })
+  public favourite!: boolean;
+
+  @prop({required: true, min: 0, max: 5})
+  public rating!: number;
 
   @prop({
+    required: true,
     type: () => String,
     enum: TypeOfOffer,
   })
   public type!: TypeOfOffer;
 
-  @prop({ default: 0 })
-  public commentCount!: number;
+  @prop({required: true, min: 1, max: 5})
+  public numberOfRooms!: number;
 
-  @prop({
-    ref: CategoryEntity,
-    required: true,
-    default: [],
-    _id: false,
-  })
-  public categories!: Ref<CategoryEntity>[];
+  @prop({required: true, min: 1, max: 10})
+  public numberOfGuests!: number;
 
-  @prop({
-    ref: UserEntity,
-    required: true,
-  })
-  public userId!: Ref<UserEntity>;
+  @prop({required: true, min: 500, max: 10000})
+  public price!: number;
+
+  @prop({required: true, type: () => [String]})
+  public facilities!: string[];
+
+  @prop({required: true, min: 1, max: 1000})
+  public numberOfComments!: number;
+
+  @prop({required: true})
+  public coordinates!: string;
 }
 
 export const OfferModel = getModelForClass(OfferEntity);
