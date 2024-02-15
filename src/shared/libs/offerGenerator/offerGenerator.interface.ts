@@ -25,7 +25,7 @@ export enum GUESTS {
 
 export enum PRICE {
     MIN_PRICE = 500,
-    MAX_PRICE = 2000
+    MAX_PRICE = 10000
 }
 
 export enum COMMENTS {

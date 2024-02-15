@@ -70,6 +70,12 @@ npm start
 npm run mock:server
 ```
 
+#### Импорт файла в базу данных
+
+```bash
+npm run ts-node ./src/main.cli.ts --import ./mocks/mocksDataNew.tsv admin test localhost buy-and-sell secret
+```
+
 В процессе запуска проекта будет выполнен процесс «Сборки проекта» и запуска результирующего кода.
 
 ## Структура проекта
