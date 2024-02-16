@@ -1,7 +1,212 @@
 openapi: 3.0.0
 info:
-  title: API for the demo project 'Six Cities'
+  title: API server for the demo project 'Six Cities'
   description: List of available API endpoints and routes for the demo project 'Six Cities'
-  version: 1.0.0
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 2.0.0
+tags: 
+  - name: offers
+    description: Действия с объявлениями
+  - name: users
+    description: Действия с пользователями
+  - name: comments
+    description: Действия с комментариями
+paths:
+ /users/register:
+  post:
+   tags: 
+        - users
+   summary: Регистрация пользователя
+   description: Регистрация нового пользователя
+   requestBody:
+    required: true
+    content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/user'
+   responses:
+     '200': 
+      description: Пользователь успешно зарегистрирован
+      content:
+        application/json:
+         schema:
+          $ref: '#/components/schemas/user'     
+     '400': 
+      description: Ошибка
+      content:
+        application/json:
+         schema:
+          $ref: '#/components/schemas/Error' 
+
+ /users/login:
+  post: 
+   tags:
+       - users
+   summary: Проверка состояния пользователя
+   description: Возвращает информацю по авторизованному пользователю
+   requestBody: 
+    description: Информация для авторизации пользователя.
+    content: 
+     application/json:
+      schema: 
+       $ref: '#/components/schemas/createUser'
+    required: true
+   responses:
+     "201":
+      description: Пользователь авторизован. Объект пользователя
+      content:
+       application/json:
+         schema:
+          $ref: '#/components/schemas/user'
+
+ /offers:
+  get: 
+   tags:
+     - offers
+   summary: Получить список офферов
+   description: Получить список офферов
+   responses:
+     '200':
+      description: Оффер успешно создан
+      content:
+        application/json:
+         schema:
+          $ref: '#/components/schemas/offer'
+     '400':
+       description: Некорректный запрос
+       content:
+        application/json:
+         schema: 
+          $ref: '#/components/schemas/Error'
+      
+
+
+components:
+  schemas:
+    Error:
+     type: object
+     properties:
+       message: 
+        type: string
+        description: Описание ошибки
+
+    createUser:
+     type: object
+     
+     properties:
+      username: 
+       type: string
+       example: Кекс
+      
+      email:
+       type: string
+       example: keksdrey@keks.com
+
+      password: 
+       type: string
+       example: keks
+
+      avatarUrl:
+       type: string
+       example: /photo/avatar/keks
+
+      isPro:
+       type: boolean
+       example: true
+       
+    user:
+     type: object
+
+     properties:
+      id: 
+       type: string
+       example: 6329c3d6a04ab1061c6425ea
+
+      email: 
+       type: string
+       example: keks@htmlacademy.ru
+      
+      username:
+       type: string
+       example: Андрей
+
+      password: 
+       type: string
+       example: keks
+
+      avatarUrl:
+       type: string
+       example: /photo/avatar/keks
+
+      isPro:
+       type: boolean
+       example: true
+    
+    offer: 
+     type: object
+     properties: 
+      name:
+       type: string
+       example: Hotel
+
+      description:
+       type: string
+       example: Super hotel
+      
+      createdDate: 
+       type: string
+       example: 2024-02-11T15:44:48.520Z
+
+      city: 
+       type: string
+       example: Brussels
+
+      previewImage:
+       type: string
+       example: photo/preview/AzureWaves
+
+      photos:
+       type: string
+       example: photo/photo1 photo/photo2
+       
+      premium: 
+       type: boolean
+       example: false
+
+      favourite: 
+       type: boolean
+       example: true
+
+      rating: 
+       type: number
+       example: 2
+
+      type: 
+       type: string
+       example: house
+
+      numberOfRooms: 
+       type: number
+       example: 1
+
+      numberOfGuests: 
+       type: number
+       example: 3
+
+      price: 
+       type: number
+       example: 5632
+
+      facilities: 
+       type: array
+       items: 
+        type: string
+       example: Laptop friendly workspace   
+
+      numberOfComments: 
+       type: number
+       example: 240
 
 # TO DO: Have to finish spec later
