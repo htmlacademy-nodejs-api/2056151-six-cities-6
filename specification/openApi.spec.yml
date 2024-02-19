@@ -14,6 +14,93 @@ tags:
   - name: comments
     description: Действия с комментариями
 paths:
+ /offers:
+  get: 
+   tags:
+     - offers
+   summary: Получить список офферов
+   description: Получение всех офферов
+   responses:
+     '200':
+      description: Список успешно получен
+      content:
+        application/json:
+         schema:
+          $ref: '#/components/schemas/offer'
+     '400':
+       description: Некорректный запрос
+       content:
+        application/json:
+         schema: 
+          $ref: '#/components/schemas/Error'
+
+  post:
+   tags:
+    - offers
+   summary: Создание оффера
+   description: Создает оффер
+   requestBody:
+    description: Информация для создания оффера
+    content:
+     application/json:
+      schema:
+       $ref: '#/components/schemas/offer'
+
+   responses:
+    '200':
+     description: Предложение успешно создано
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/offer'
+    '400':
+     description: Некорректный запрос
+     content:
+      application/json:
+       schema: 
+         $ref: '#/components/schemas/Error'
+
+ /offers/{offerId}:
+  put:
+   tags:
+     - offers
+   summary: Редактирует оффер
+   description: Редактирует существующий оффер
+   requestBody:
+    description: Информация для обновления оффера
+    content:
+     application-json:
+      schema:
+       $ref: '#/components/schemas/offer' 
+   responses:
+     '200':
+      description: Предложение успешно отредактировано
+      content:
+       application-json:
+        schema:
+         $ref: '#/components/schemas/offer'
+     '400':
+      description: Некорректный запрос
+      content:
+       application/json:
+        schema: 
+         $ref: '#/components/schemas/Error'
+  delete:
+   tags:
+     - offers
+   summary: Удаление предложения
+   description: Удаляет существующее предложение
+   responses:
+    '200':
+     description: Предложение успешно удалено
+    '400':
+     description: Некорректный запрос
+     content:
+      application/json:
+       schema: 
+        $ref: '#/components/schemas/Error'
+          
+
  /users/register:
   post:
    tags: 
@@ -44,8 +131,8 @@ paths:
   post: 
    tags:
        - users
-   summary: Проверка состояния пользователя
-   description: Возвращает информацю по авторизованному пользователю
+   summary: Авторизация пользователя
+   description: Авторизует зарегистрированного пользователя
    requestBody: 
     description: Информация для авторизации пользователя.
     content: 
@@ -60,27 +147,68 @@ paths:
        application/json:
          schema:
           $ref: '#/components/schemas/user'
-
- /offers:
-  get: 
+ 
+ /users/logout:
+  post:
    tags:
-     - offers
-   summary: Получить список офферов
-   description: Получить список офферов
+        - users
+   summary: Сброс авторизации пользователя
+   description: Выход пользователя из своего аккаунта
+
+   requestBody:
+    content:
+      application-json:
+        schema:
+          $ref: '#/components/schemas/user'
+
    responses:
-     '200':
-      description: Оффер успешно создан
-      content:
-        application/json:
-         schema:
-          $ref: '#/components/schemas/offer'
-     '400':
-       description: Некорректный запрос
-       content:
-        application/json:
-         schema: 
-          $ref: '#/components/schemas/Error'
-      
+    '204':
+      description: Пользователь успешно вышел
+
+ /comments/{offerId}:
+    get:
+      tags:
+        - comments
+      summary: Получение комментариев
+      description: Получение списка комментариев
+
+      responses:
+        '200':
+          description: Список комментариев успешно получен
+          content:
+            application-json:
+              schema:
+                $ref: '#/components/schemas/comment'
+        '404':
+          description: Предложение с указанным ID не найдено
+
+    post:
+      tags:
+        - comments
+      summary: Добавление комментария
+      description: Добавляет комментария к предложению
+
+      requestBody:
+        description: Информация о добавляемом комментарии
+
+        content:
+          application-json:
+            schema:
+              $ref: '#/components/schemas/comment'
+
+      responses:
+        '200':
+          description: Комментарий добавлен
+          content:
+            application-json:
+              schema:
+                $ref: '#/components/schemas/comment'
+        '404':
+          description: Предложение с указанным ID не найдено
+        '400':
+          description: Ошибка валидации. Переданы не все, необходимые для создания предложения, данные
+        '401':
+          description: Вы не можете оставлять комментарии, т.к. не авторизованы
 
 
 components:
@@ -91,58 +219,6 @@ components:
        message: 
         type: string
         description: Описание ошибки
-
-    createUser:
-     type: object
-     
-     properties:
-      username: 
-       type: string
-       example: Кекс
-      
-      email:
-       type: string
-       example: keksdrey@keks.com
-
-      password: 
-       type: string
-       example: keks
-
-      avatarUrl:
-       type: string
-       example: /photo/avatar/keks
-
-      isPro:
-       type: boolean
-       example: true
-       
-    user:
-     type: object
-
-     properties:
-      id: 
-       type: string
-       example: 6329c3d6a04ab1061c6425ea
-
-      email: 
-       type: string
-       example: keks@htmlacademy.ru
-      
-      username:
-       type: string
-       example: Андрей
-
-      password: 
-       type: string
-       example: keks
-
-      avatarUrl:
-       type: string
-       example: /photo/avatar/keks
-
-      isPro:
-       type: boolean
-       example: true
     
     offer: 
      type: object
@@ -209,4 +285,79 @@ components:
        type: number
        example: 240
 
-# TO DO: Have to finish spec later
+    createUser:
+     type: object
+     
+     properties:
+      username: 
+       type: string
+       example: Кекс
+      
+      email:
+       type: string
+       example: keksdrey@keks.com
+
+      password: 
+       type: string
+       example: keks
+
+      avatarUrl:
+       type: string
+       example: /photo/avatar/keks
+
+      isPro:
+       type: boolean
+       example: true
+
+    user:
+     type: object
+
+     properties:
+      id: 
+       type: string
+       example: 6329c3d6a04ab1061c6425ea
+
+      email: 
+       type: string
+       example: keks@htmlacademy.ru
+      
+      username:
+       type: string
+       example: Андрей
+
+      password: 
+       type: string
+       example: keks
+
+      avatarUrl:
+       type: string
+       example: /photo/avatar/keks
+
+      isPro:
+       type: boolean
+       example: true
+
+    comment:
+     type: object
+
+     properties:
+      text:
+       type: string
+       description: Текст комментария
+       example: Лучший отель, который я только видел! Советую всем!
+      rating:
+       type: number
+       description: Рейтинг пользователя для предложения
+       minimum: 1
+       maximum: 5
+       example: 1
+      user:
+       type: object
+       description: Информация об авторе комментария
+       example: {
+            email: 'aleshaaaa@gmail.com',
+            username: 'Алеша',
+            avatarUrl: '/photo/avatar/alesha',
+            password: '123456',
+            isPro: true
+          } 
