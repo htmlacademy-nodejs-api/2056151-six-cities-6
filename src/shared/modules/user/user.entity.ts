@@ -3,9 +3,11 @@ import {
   getModelForClass,
   modelOptions,
   prop,
+  Ref,
 } from '@typegoose/typegoose';
 import { User } from '../../types/index.js';
 import { createSHA256 } from '../../helpers/index.js';
+import { OfferEntity } from '../offer/offer.entity.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export interface UserEntity extends defaultClasses.Base {}
@@ -33,6 +35,9 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
 
   @prop({ required: true, default: false })
   public isPro: boolean;
+
+  @prop({ ref: () => OfferEntity, default: [] })
+  public favouriteOffers: Ref<OfferEntity>[];
 
   constructor(userData: User) {
     super();

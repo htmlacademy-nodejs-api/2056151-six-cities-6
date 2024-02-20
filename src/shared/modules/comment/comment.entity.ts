@@ -14,6 +14,7 @@ export interface CommentEntity extends defaultClasses.Base {}
 @modelOptions({
   schemaOptions: {
     collection: 'comments',
+    timestamps: true
   },
 })
 
@@ -21,6 +22,12 @@ export interface CommentEntity extends defaultClasses.Base {}
 export class CommentEntity extends defaultClasses.TimeStamps {
   @prop({ trim: true, required: true })
   public text: string;
+
+  @prop({ trim: true, required: true })
+  public date: string;
+
+  @prop({ required: true, min: 1, max: 5 })
+  public rating: string;
 
   @prop({ ref: OfferEntity, required: true})
   public offerId: Ref<OfferEntity>;

@@ -6,13 +6,18 @@ import { inject, injectable } from 'inversify';
 import { Component } from '../../types/index.js';
 import { Logger } from '../../libs/logger/index.js';
 import { UpdateUserDto } from './dto/update-user-dto.js';
+import { FavouriteDto } from './dto/favourite.dto.js';
+import { Types } from 'mongoose';
+import { OfferService } from '../offer/index.js';
 
 @injectable()
 export class DefaultUserService implements UserService {
   constructor(
     @inject(Component.Logger) private readonly logger: Logger,
     @inject(Component.UserModel)
-    private readonly userModel: types.ModelType<UserEntity>
+    private readonly userModel: types.ModelType<UserEntity>,
+    @inject(Component.OfferService)
+    private readonly offerService: OfferService
   ) {}
 
   public async create(
@@ -52,5 +57,54 @@ export class DefaultUserService implements UserService {
     dto: UpdateUserDto
   ): Promise<DocumentType<UserEntity> | null> {
     return this.userModel.findByIdAndUpdate(userId, dto, { new: true }).exec();
+  }
+
+  public async addToFavourites(
+    dto: FavouriteDto
+  ): Promise<DocumentType<UserEntity>> {
+    const { userId, offerId } = dto;
+
+    const user = await this.userModel.findById(userId);
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    const offerExists = await this.offerService.exists(offerId);
+
+    if (!offerExists) {
+      throw new Error('Offer not found');
+    }
+
+    const offerObjectId = new Types.ObjectId(offerId);
+    if (!user.favouriteOffers.map((id) => id.toString()).includes(offerId)) {
+      user.favouriteOffers.push(offerObjectId);
+      await user.save();
+    }
+
+    return user;
+  }
+
+  public async removeFromFavourites(
+    dto: FavouriteDto
+  ): Promise<DocumentType<UserEntity>> {
+    const { userId, offerId } = dto;
+
+    const user = await this.userModel.findById(userId);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    const offerExists = await this.offerService.exists(offerId);
+    if (!offerExists) {
+      throw new Error('Offer not found');
+    }
+
+    user.favouriteOffers = user.favouriteOffers.filter(
+      (id) => id.toString() !== offerId
+    );
+    await user.save();
+
+    return user;
   }
 }
